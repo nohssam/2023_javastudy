@@ -7,7 +7,7 @@ import java.io.IOException;
 
 // 바이트 출력 스트림 : OutputStream 자식클래스 FileOutputStream 사용
 //                  FileOutputStream를 이용해서 해당파일에 내용을 1byte 쓰기(출력, 저장) 
-//    주묘메서드 :  write(int b) : int b => 숫자(아스키코드(0-255), 한 글자),
+//    주요메서드 :  write(int b) : int b => 숫자(아스키코드(0-255), 한 글자),
 //                              ** 아스키코드(숫자,대문자,소문자, 일부 특수문자을 숫자와 1:1 매칭한 코드)
 //               write(byte[] b) :  배열은 아스키코드의 배열이다.
 //               ** String 클래스에서 getBytes()를 이용해서 byte[]로 만들어서 사용 
