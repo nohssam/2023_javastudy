@@ -1,4 +1,4 @@
-package mybatis.com.ict.edu;
+package mybatis.com.ict.edu2;
 
 import java.util.List;
 
@@ -52,6 +52,15 @@ public class DAO {
 		ss.commit();
 		return result;
 	}
+	public static boolean getIdChk(String custid) {
+		boolean result = false;
+		VO vo = getSession().selectOne("idChk", custid);
+		if(vo == null) {
+			result = true;
+		}
+		return result;
+	}
+	
 }
 
 

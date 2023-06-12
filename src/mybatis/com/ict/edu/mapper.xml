@@ -7,7 +7,8 @@
 	   태그 : <태그  속성> 텍스트 </태그>
 	    id 속성 : 외부(DAO)에서 해당 태그를 지칭하는 (호출하는) 이름, 중복안됨  
 	    resultType 속성 : 결과에 대한 속성(select문은 95% VO속성이다)
-	    parameterType 속성 : #{컬럼명} 의  자료형, 대부분 VO속성이다
+	       select문에서 집계합수를 사용하면 resultType int 이다.    
+	    parameterType 속성 : 대부분 VO속성이다(VO 아니면 전달하는 변수의 자료형이다.)
 		<select id="" resultType=""></select>
 	    <select id="" resultType="" parameterType=""></select>
 	    
@@ -20,4 +21,31 @@
 	    select * from customer order by custid
 	</select>
 	
+	<select id="custOne" parameterType="String" resultType="mybatis.com.ict.edu.VO">
+		select * from customer where custid = #{custid} 
+	</select>
+	
+	<insert id="custIns" parameterType="mybatis.com.ict.edu.VO">
+		insert into customer(custid, name, address, phone)
+		values(customer_seq.nextval,#{name},#{address},#{phone})
+	</insert>
+	
+	<delete id="custDel" parameterType="mybatis.com.ict.edu.VO">
+		delete from customer where custid = #{custid}
+	</delete>
+	
+	<update id="custUpdate" parameterType="mybatis.com.ict.edu.VO">
+		update customer set name=#{name}, address=#{address}, phone=#{phone}
+		where custid = #{custid}
+	</update>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
