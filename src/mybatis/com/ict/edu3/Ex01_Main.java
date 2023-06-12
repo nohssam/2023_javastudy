@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -25,12 +26,12 @@ public class Ex01_Main extends JFrame{
 	JScrollPane sc;
 	JButton jb_insert, jb_delete, jb_update, jb_select, jb_eraser, jb_all;
 	JTextField jtf_id, jtf_name, jtf_phone, jtf_addr, jtf_com, jtf_select;
-	String[] select = {"이름", "전화", "주소", "회사"};
+	String[] select = {"이름", "전화", "주소"}; 
 	JComboBox<String> jcomb;
 	public Ex01_Main() {
 		// 위
 				jp_title = new JPanel();
-				jp_title.add(new JLabel("AddressBook"));
+				jp_title.add(new JLabel("CUSTOMER"));
 				add(jp_title, BorderLayout.NORTH);
 				
 				// 가운데
@@ -56,16 +57,10 @@ public class Ex01_Main extends JFrame{
 				jp_write.add(jp_center_left, BorderLayout.SOUTH);
 				add(jp_write, BorderLayout.WEST);
 				
+				List<VO> list = DAO.getList();
+				String[] title = { "CUSTID", "Name", "Address","Phone" };
+				String[][] text = {} ;
 				
-				String[] title = { "ID", "Name", "Phone", "Address", "Company" };
-				String[][] text = { { "100", "dada", "010-111-2225", "seoul", "cj" },
-		                { "101", "jeeho", "010-111-2225", "seoul", "asianaidt" },
-		                { "102", "min", "010-111-2225", "seoul", "asianaidt" }, { "103", "song", "010-111-2225", "seoul", "cj" },
-		                { "104", "tommy", "010-900-2245", "la", "samsung" }, { "105", "billy", "010-133-2300", "tokyo", "hyundai" },
-		                { "106", "jane", "010-623-2035", "pusan", "lg" }, { "107", "mel", "010-155-5211", "tokyo", "lg" },
-		                { "108", "bruce", "010-721-7800", "pusan", "cj" }, { "109", "neil", "010-451-3888", "seoul", "samsung" },
-		                { "110", "mat", "010-112-2095", "la", "hyundai" }, { "111", "bong", "010-354-2332", "london", "asianaidt" },
-		                { "112", "jin", "010-622-8360", "osaka", "cj" }, { "113", "jaja", "666666", "busan", "12asdasdsad" }, };
 				
 				jp_select = new JPanel();
 				table = new JTable(text, title);

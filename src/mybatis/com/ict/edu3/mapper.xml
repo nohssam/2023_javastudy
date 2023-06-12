@@ -17,29 +17,29 @@
 	    <insert id="" parameterType=""></insert>
 	    <delete id="" parameterType=""></delete>
 	 -->
-	<select id="custList" resultType="mybatis.com.ict.edu2.VO">
+	<select id="custList" resultType="mybatis.com.ict.edu3.VO">
 	    select * from customer order by custid 
 	</select>
 	
-	<select id="custOne" parameterType="String" resultType="mybatis.com.ict.edu2.VO">
+	<select id="custOne" parameterType="String" resultType="mybatis.com.ict.edu3.VO">
 		select * from customer where custid = #{custid} 
 	</select>
 	
-	<insert id="custIns" parameterType="mybatis.com.ict.edu2.VO">
+	<insert id="custIns" parameterType="mybatis.com.ict.edu3.VO">
 		insert into customer(custid, name, address, phone)
 		values(customer_seq.nextval,#{name},#{address},#{phone})
 	</insert>
 	
-	<delete id="custDel" parameterType="mybatis.com.ict.edu2.VO">
+	<delete id="custDel" parameterType="mybatis.com.ict.edu3.VO">
 		delete from customer where custid = #{custid}
 	</delete>
 	
-	<update id="custUpdate" parameterType="mybatis.com.ict.edu2.VO">
+	<update id="custUpdate" parameterType="mybatis.com.ict.edu3.VO">
 		update customer set name=#{name}, address=#{address}, phone=#{phone}
 		where custid = #{custid}
 	</update>
 	
-	<select id="idChk" parameterType="String" resultType="mybatis.com.ict.edu2.VO">
+	<select id="idChk" parameterType="String" resultType="mybatis.com.ict.edu3.VO">
 		select custid from customer where custid= #{custid}
 	</select>
 </mapper>
