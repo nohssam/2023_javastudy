@@ -1,9 +1,15 @@
-package day23.com.ict.edu;
+package jdbc.com.ict.edu5;
 
 import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -18,13 +24,15 @@ import javax.swing.ScrollPaneConstants;
 // 메뉴바에 메뉴를 붙인다. 메뉴에 메뉴아이템을 붙인다., 
 // 메뉴아이템 -> 메뉴 -> 메뉴바 -> 프레임
 // 메뉴바는 프레임에 붙인다. (setJMenuBar)
-public class Ex06_Menu extends JFrame{
+public class Ex01_Menu extends JFrame{
 	JTextArea jta;
 	JScrollPane jsp;
 	JMenuBar jmb;
 	JMenu m_file, m_form, font_form, m_help;
 	JMenuItem i_newFile, i_openFile, i_saveFile, i_exitFile, i_item1, i_item2, i_item3, i_help, i_info; 
-	public Ex06_Menu() {
+	String deff ;
+	String openpath;
+	public Ex01_Menu() {
 		super("간단메모장");
 		jta =new JTextArea();
 		jsp = new JScrollPane(jta, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
@@ -107,7 +115,33 @@ public class Ex06_Menu extends JFrame{
 				// 파일 열기 다이얼 로그 
 				FileDialog fd = new FileDialog((JFrame)getParent(),"불러오기", FileDialog.LOAD);
 				fd.setVisible(true);
-				// 실제 불러오는 코딩( I/O )
+				openpath = fd.getDirectory()+fd.getFile();
+				
+				if(! openpath.equals("nullnull")) {
+					jta.setText("");
+					File file = new File(openpath);
+					FileReader fr = null;
+					BufferedReader br = null;
+					try {
+						fr = new FileReader(file);
+						br = new BufferedReader(fr);
+						String str = null;
+						
+						while((str = br.readLine()) != null) {
+							jta.append(str+"\n");
+						}
+
+						// 마지막줄 \n 때
+						deff = jta.getText();
+					} catch (Exception e2) {
+					}finally {
+						try {
+							br.close();
+							fr.close();
+						} catch (Exception e3) {
+						}
+					}
+				}
 			}
 		});
 		// 저장
@@ -117,15 +151,69 @@ public class Ex06_Menu extends JFrame{
 				// 파일 저장 다이얼 로그 
 				FileDialog fd = new FileDialog((JFrame)getParent(),"저장하기", FileDialog.SAVE);
 				fd.setVisible(true);
-				// 실제 저장하는 코딩( I/O )
+				String msg = fd.getDirectory()+fd.getFile();
+				if(! msg.equals("nullnull")) {
+					File file = new File(msg);
+					FileWriter fr = null;
+					BufferedWriter br = null;
+					try {
+						fr = new FileWriter(file);
+						br = new BufferedWriter(fr);
+						String str = jta.getText();
+						br.write(str);
+						br.flush();
+					} catch (Exception e2) {
+					} finally {
+						try {
+							br.close();
+							fr.close();
+						} catch (Exception e3) {
+						}
+					}
+				}
 			}
 		});
 		i_exitFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-				// 원래는 내용이 변경되면 저장할지를 물어보고 
-				// 내요이 변경되지 않으면 그냥 종료.
+				if (deff.equals(jta.getText())) {
+					System.exit(0);
+					// 원래는 내용이 변경되면 저장할지를 물어보고 
+					// 내용이 변경되지 않으면 그냥 종료.
+					
+				}else {
+					// 다시 저장 다이알로그
+					//  저장 , 저장안함, 취소
+					int res = JOptionPane.showOptionDialog(getParent(),
+							"변경내용을 저장할까요?", "간단 메모장", JOptionPane.YES_NO_CANCEL_OPTION, 
+							JOptionPane.PLAIN_MESSAGE, null,null, null);
+					if(res == 0) {
+						File file = new File(openpath);
+						FileWriter fr = null;
+						BufferedWriter br = null;
+						try {
+							fr = new FileWriter(file);
+							br = new BufferedWriter(fr);
+							String str = jta.getText();
+							br.write(str);
+							br.flush();
+						} catch (Exception e2) {
+						} finally {
+							try {
+								br.close();
+								fr.close();
+								System.exit(0);
+							} catch (Exception e3) {
+							}
+						}
+						
+					}else if(res == 1) {
+						System.exit(0);
+					}else {
+						return;
+					}
+				}
+				
 			}
 		});
 		
@@ -170,7 +258,7 @@ public class Ex06_Menu extends JFrame{
 		});
 	}
 	public static void main(String[] args) {
-		new Ex06_Menu();
+		new Ex01_Menu();
 	}
 }
 

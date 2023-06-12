@@ -1,4 +1,4 @@
-package day23.com.ict.edu;
+package day27.com.ict.edu;
 
 import java.awt.FileDialog;
 import java.awt.Font;
@@ -18,13 +18,13 @@ import javax.swing.ScrollPaneConstants;
 // 메뉴바에 메뉴를 붙인다. 메뉴에 메뉴아이템을 붙인다., 
 // 메뉴아이템 -> 메뉴 -> 메뉴바 -> 프레임
 // 메뉴바는 프레임에 붙인다. (setJMenuBar)
-public class Ex06_Menu extends JFrame{
+public class Ex07_Menu extends JFrame{
 	JTextArea jta;
 	JScrollPane jsp;
 	JMenuBar jmb;
 	JMenu m_file, m_form, font_form, m_help;
 	JMenuItem i_newFile, i_openFile, i_saveFile, i_exitFile, i_item1, i_item2, i_item3, i_help, i_info; 
-	public Ex06_Menu() {
+	public Ex07_Menu() {
 		super("간단메모장");
 		jta =new JTextArea();
 		jsp = new JScrollPane(jta, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
@@ -91,7 +91,7 @@ public class Ex06_Menu extends JFrame{
 					 int res = JOptionPane.showOptionDialog(getParent(), "변경 내용을 제목 없음에 저장하시겠습니까?",
 						 "간단 메모장", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 					 if(res == 0) {
-						 // 실제 저장하는 코드 
+						 // 실제 저장하는 코드
 					 }else if(res == 1) {
 						 jta.setText("");
 					 }else if(res == 2) {
@@ -170,7 +170,7 @@ public class Ex06_Menu extends JFrame{
 		});
 	}
 	public static void main(String[] args) {
-		new Ex06_Menu();
+		new Ex07_Menu();
 	}
 }
 

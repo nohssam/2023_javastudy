@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-//바이트 입력 스트림 : InputStream 자식클래스 FileInputStream 사용
+// 바이트 입력 스트림 : InputStream 자식클래스 FileInputStream 사용
 //				   FileInStream를 이용해서 해당파일에 내용을 1byte 읽기 
 //		주요메서드 :  read() : int => 숫자(0-255, 아스키코드), 해당 숫자를 문자로 보려면  char 형 변환한다.
 //                  더 이상 읽을 수 없으면 -1이 나온다.

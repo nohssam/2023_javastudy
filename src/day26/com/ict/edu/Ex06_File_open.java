@@ -7,9 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedOutputStream;
+import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,18 +20,18 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-public class Ex05_File_save extends JFrame{
+public class Ex06_File_open extends JFrame{
 	JPanel jp ;
 	JTextField jtf;
 	JButton jb;
 	JTextArea jta;
 	JScrollPane jsp;
-	public Ex05_File_save() {
-		super("저장하기");
+	public Ex06_File_open() {
+		super("불러오기");
 		
 		jp = new JPanel();
 		jtf = new JTextField(20);
-		jb = new JButton("저장하기");
+		jb = new JButton("불러오기");
 		jta = new JTextArea();
 		jsp = new JScrollPane(jta, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -52,45 +52,47 @@ public class Ex05_File_save extends JFrame{
 		jb.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				f_save();
+				f_open();
 			}
 		});
 		jtf.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				f_save();
+				f_open();
 			}
 		});
 		jtf.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				FileDialog fd = new FileDialog((Frame) getParent(), "저장하기", FileDialog.SAVE);
+				FileDialog fd = new FileDialog((Frame) getParent(), "불러오기", FileDialog.LOAD);
 				fd.setVisible(true);
 				String msg = fd.getDirectory()+fd.getFile();
 				if(! msg.equals("nullnull")) {
 					jtf.setText(msg);
+					f_open();
 				}
 			}
 		});
 	}
-	private void f_save() {
+	private void f_open() {
 		String pathname = jtf.getText().trim();
 		if(pathname.length() > 0) {
 			File file = new File(pathname);
-			FileOutputStream fos = null;
-			BufferedOutputStream bos = null;
+			FileInputStream fis = null;
+			BufferedInputStream bis = null;
 			try {
-				fos = new FileOutputStream(file);
-				bos = new BufferedOutputStream(fos);
+				fis = new FileInputStream(file);
+				bis = new BufferedInputStream(fis);
 				
-				String msg = jta.getText().trim();
-				bos.write(msg.getBytes());
-				bos.flush();
+				byte[] b = new byte[(int) file.length()];
+				bis.read(b);
+				String msg = new String(b).trim();
+				jta.setText(msg);
 			} catch (Exception e) {
 			} finally {
 				try {
-					bos.close();
-					fos.close();
+					bis.close();
+					fis.close();
 				} catch (Exception e2) {
 				}
 			}
@@ -98,7 +100,7 @@ public class Ex05_File_save extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		new Ex05_File_save();
+		new Ex06_File_open();
 	}
 }
 
