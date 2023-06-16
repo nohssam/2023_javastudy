@@ -379,7 +379,7 @@ public class ChatClient extends JFrame implements Runnable{
 							break esc;
 						case 1 : // 메세지 전달
 							jta.append(p.getMsg()+"\n");
-							// jta.setCaretPosition(jta.getText().length());
+							jta.setCaretPosition(jta.getText().length());
 							break;
 						case 2 :
 							// 접속 및 갱신
@@ -387,11 +387,16 @@ public class ChatClient extends JFrame implements Runnable{
 							user_list.setListData(p.getNames());
 							//  방 목록 
 							room_list.setListData(p.getRooms());
+							
 							break;
 						case 4 : // 방 참여
 							join_list.setListData(p.getNames());
 							jta.append(p.getMsg()+"\n");
 							break;	
+						case 5 : 
+							// 참여자 목록
+							join_list.setListData(p.getNames());
+							break;
 						case 6 : // 쪽지
 							JOptionPane.showMessageDialog(getParent(), p.getMsg());
 							break;	

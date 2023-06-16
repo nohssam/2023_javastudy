@@ -53,7 +53,7 @@ public class ChatServer implements Runnable{
 		r_list.add(room);
 	}
 	
-	// index 받아서 r_list로 부터 방 객체하나늘 반환
+	// index 받아서 r_list로 부터 방 객체 하나를 반환
 	public ChatRoom getRoom(int index) {
 		return r_list.get(index);
 	}
@@ -62,7 +62,7 @@ public class ChatServer implements Runnable{
 	public void removeClient(CopyClient cc) {
 		c_list.remove(cc);
 		// 목록 갱신
-		// refresh();
+		refresh();
 	}
 	// 대기실 목록 갱신 (방목록, 대기실 명단)
 	public void refresh() {
@@ -71,6 +71,7 @@ public class ChatServer implements Runnable{
 		p.setNames(getUserName()); // 대기실 명단 갱신
 		p.setRooms(getRoomName()); // 방 목록 갱신
 		
+		// 대기실에 사람에게 전달
 		sendMsg(p);
 	}
 	// 대기실 명단 갱신
@@ -95,10 +96,12 @@ public class ChatServer implements Runnable{
 	public void addClient(CopyClient cc) {
 		c_list.add(cc);
 		refresh();
+		
 	}
 	// 방 객체 삭제 
 	public void removeRoom(ChatRoom c_room) {
 		r_list.remove(c_room);
+		
 	}
 	
 	public static void main(String[] args) {

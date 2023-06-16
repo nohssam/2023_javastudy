@@ -60,7 +60,7 @@ public class ChatRoom {
 		
 		Protocol p = new Protocol();
 		p.setCmd(1);
-		p.setMsg(" ** " + cc.nickName + "님 입장 ** ");
+		p.setMsg(" ** " + cc.nickName + "님 퇴장 ** ");
 		p.setNames(getJoinUsers());
 		
 		sendProtocol(p);

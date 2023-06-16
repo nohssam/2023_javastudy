@@ -7,10 +7,36 @@ public class Protocol implements Serializable{
 	int cmd;
 	String msg;
 	
-	String[] names;  // 접속자 명단
+	String[] w_names; 
+	String[] c_names;  // 대기실 접속 명단
+	String[] names;    // 대기실 접속 명단
 	String[] rooms;  // 방 목록 
 	
 	int u_count, r_index, c_index ;
+	
+	public String[] getNames() {
+		return names;
+	}
+
+	public void setNames(String[] names) {
+		this.names = names;
+	}
+
+	public String[] getW_names() {
+		return w_names;
+	}
+
+	public void setW_names(String[] w_names) {
+		this.w_names = w_names;
+	}
+
+	public String[] getC_names() {
+		return c_names;
+	}
+
+	public void setC_names(String[] c_names) {
+		this.c_names = c_names;
+	}
 
 	public int getCmd() {
 		return cmd;
@@ -26,14 +52,6 @@ public class Protocol implements Serializable{
 
 	public void setMsg(String msg) {
 		this.msg = msg;
-	}
-
-	public String[] getNames() {
-		return names;
-	}
-
-	public void setNames(String[] names) {
-		this.names = names;
 	}
 
 	public String[] getRooms() {

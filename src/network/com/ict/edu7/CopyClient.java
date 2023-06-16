@@ -70,13 +70,12 @@ public class CopyClient extends Thread{
 							c_room.join(this);
 							// 대기실에서 나오기 
 							server.removeClient(this);
-							server.refresh();
 							break;
 						case 5: // 방나가기
 							outRoom();
-							server.refresh();
 							// 대기실 자기 자신 추가 
 							server.addClient(this);
+														
 							break;
 						case 6: 
 							CopyClient client = server.c_list.get(p.getC_index());
@@ -110,7 +109,11 @@ public class CopyClient extends Thread{
 		if(cnt == 0) {
 			server.removeRoom(c_room);
 		}
-		c_room = null;
+		
+		Protocol p = new Protocol();
+		p.setCmd(5);
+		p.setNames(c_room.getJoinUsers());
+		c_room.sendProtocol(p);
 	}
 }
 
