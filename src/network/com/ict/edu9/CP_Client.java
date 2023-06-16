@@ -8,12 +8,13 @@ import java.util.List;
 import network.com.ict.edu9_db.DAO;
 import network.com.ict.edu9_db.VO;
 
-public class CP_Client extends Thread{
+public class CP_Client extends Thread {
 	Socket s;
 	DB_Server server;
 	ObjectInputStream in;
 	ObjectOutputStream out;
-	public CP_Client(Socket s,	DB_Server server) {
+
+	public CP_Client(Socket s, DB_Server server) {
 		this.s = s;
 		this.server = server;
 		try {
@@ -22,37 +23,31 @@ public class CP_Client extends Thread{
 		} catch (Exception e) {
 		}
 	}
-	
+
 	@Override
 	public void run() {
-		esc: while(true) {
+		while (true) {
 			try {
 				Object obj = in.readObject();
-				if(obj != null) {
-					
-					Protocol p = (Protocol)obj;
+				if (obj != null) {
+
+					Protocol p = (Protocol) obj;
 					switch (p.getCmd()) {
-					    case 0: 
-					    	out.writeObject(p);
-							out.flush();
-					    	break esc;
-						case 1: 
-							List<VO> list = DAO.getList();
-							p.setList(list);
-							out.writeObject(p);
-							out.flush();
+					case 0:
+						out.writeObject(p);
+						out.flush();
+						break;
+					case 1:
+						List<VO> list = DAO.getList();
+						p.setList(list);
+						out.writeObject(p);
+						out.flush();
 						break;
 					}
 				}
 			} catch (Exception e) {
-				System.out.println(e);
 			}
 		}
-		try {
-			out.close();
-			in.close();
-			s.close();
-		} catch (Exception e) {
-		}
+
 	}
 }

@@ -143,6 +143,7 @@ public class DB_Client extends JFrame implements Runnable {
 		try {
 			out.close();
 			in.close();
+			s.close();
 			System.exit(0);
 		} catch (Exception e) {
 		}
