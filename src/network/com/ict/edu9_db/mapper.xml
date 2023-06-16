@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.BlogMapper">
+	
+	<select id="custList" resultType="network.com.ict.edu9_db.VO">
+	    select * from customer order by custid 
+	</select>
+	
+	<select id="custOne" parameterType="String" resultType="network.com.ict.edu9_db.VO">
+		select * from customer where custid = #{custid} 
+	</select>
+	
+	<insert id="custIns" parameterType="network.com.ict.edu9_db.VO">
+		insert into customer(custid, name, address, phone)
+		values(customer_seq.nextval,#{name},#{address},#{phone})
+	</insert>
+	
+	<delete id="custDel" parameterType="network.com.ict.edu9_db.VO">
+		delete from customer where custid = #{custid}
+	</delete>
+	
+	<update id="custUpdate" parameterType="network.com.ict.edu9_db.VO">
+		update customer set name=#{name}, address=#{address}, phone=#{phone}
+		where custid = #{custid}
+	</update>
+	
+	<select id="idChk" parameterType="String" resultType="network.com.ict.edu9_db.VO">
+		select custid from customer where custid= #{custid}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
