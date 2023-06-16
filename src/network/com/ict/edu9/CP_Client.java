@@ -43,6 +43,18 @@ public class CP_Client extends Thread {
 						out.writeObject(p);
 						out.flush();
 						break;
+					case 2 :
+						VO vo = p.getVo();
+						int result = DAO.getInsert(vo);
+						if(result>0) {
+							Protocol p2 = new Protocol();
+							List<VO> list2 = DAO.getList();
+							p2.setCmd(1);
+							p2.setList(list2);
+							out.writeObject(p2);
+							out.flush();
+						}
+						break;
 					}
 				}
 			} catch (Exception e) {

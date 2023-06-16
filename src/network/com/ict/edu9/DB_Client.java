@@ -124,6 +124,24 @@ public class DB_Client extends JFrame implements Runnable {
 				
 			}
 		});
+		jb2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VO vo = new VO();
+				vo.setName(jtf1.getText().trim());
+				vo.setName(jtf2.getText().trim());
+				vo.setAddress(jtf3.getText().trim());
+				vo.setPhone(jtf4.getText().trim());
+				try {
+					Protocol p = new Protocol();
+					p.setCmd(2);
+					p.setVo(vo);
+					out.writeObject(p);
+					out.flush();
+				}catch (Exception e2) {
+				}
+			}
+		});
 	}
 
 	// 접속
